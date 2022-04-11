@@ -6,10 +6,10 @@ import com.example15.employee.exception.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    Employee [] employees = {
-    new Employee("Николай", "Семёнов"),
-    new Employee("Роман", "Карлов"),
-    new Employee("Вероника", "Павлова") };
+Employee [] employees = {
+new Employee("Николай", "Семёнов"),
+new Employee("Роман", "Карлов"),
+new Employee("Вероника", "Павлова") };
 @Override
 public String findEmployee (String firstName, String lastName) {
     for (int i = 0; i < employees.length; i++) {

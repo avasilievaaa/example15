@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/employee")
 public class EmployeeController {
 private final EmployeeServiceImpl employeeService;
-public EmployeeController(EmployeeServiceImpl employeeService) {
-    this.employeeService = employeeService;
-}
+public EmployeeController(EmployeeServiceImpl employeeService) {this.employeeService = employeeService;}
 @GetMapping("/add")
 public String Employee (@RequestParam String firstName, @RequestParam String lastName) {return employeeService.addEmployee(firstName,lastName);}
 @GetMapping("/remove")
