@@ -6,31 +6,45 @@ import com.example15.employee.exception.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-Employee [] employees = {
+Employee[] employees = {
 new Employee("Николай", "Семёнов"),
 new Employee("Роман", "Карлов"),
-new Employee("Вероника", "Павлова") };
+new Employee("Вероника", "Павлова")};
+private int size;
 @Override
-public String findEmployee (String firstName, String lastName) {
-    for (int i = 0; i < employees.length; i++) {
-    if (employees [i].getFirstName().equals(firstName) & employees [i].getLastName().equals(lastName)) {
-    return "firstName: " + employees [i].getFirstName() + ", lastName: " + employees [i].getLastName();}
-} throw new EmployeeBadException(); }
+public Employee addEmployee(String firstName, String lastName) {
+Employee newEmployee = new Employee(firstName, lastName);
+return addEmployee(newEmployee);}
 @Override
-public String addEmployee (String firstName, String lastName) {
-     int index = findFreeNumber ();
-     if (index == -1) {throw new EmployeeFullArrayException();}
-     employees [index] = new Employee(firstName, lastName);
-     throw new EmployeeBadException();}
-public int findFreeNumber ()  {
-    for (int i = 0; i < employees.length; i++) {
-    if (employees [i] == null) {return i;}}
-    return -1;}
+public Employee addEmployee(Employee employee) {
+if (size == employees.length) {throw new EmployeeFullArrayException();}
+int index = indexOf(employee);
+if (index != -1) {throw new EmployeeBadException();}
+employees[size++] = employee;
+return employee;}
 @Override
-public String removeEmployee (String firstName, String lastName) {
-    for (int i = 0; i < employees.length; i++) {
-    if (employees [i].getFirstName().equals(firstName) & employees [i].getLastName().equals(lastName)) {
-    employees [i] = null;
-    return "Удален сотрудник: " + employees [i].getFirstName() + " " + employees [i].getLastName();}}
-    throw new EmployeeNotFoundException();}
+public Employee removeEmployee(String firstName, String lastName) {
+Employee newEmployee = new Employee(firstName, lastName);
+return removeEmployee(newEmployee);}
+@Override
+public Employee removeEmployee(Employee employee) {
+int index = indexOf(employee);
+if (index != -1) {
+Employee result = employees[index];
+System.arraycopy(employees, index = 1, employees, index, size = index);
+size++;
+return result;}
+throw new EmployeeNotFoundException();}
+@Override
+public Employee findEmployee(String firstName, String lastName) {
+Employee newEmployee = new Employee(firstName, lastName);
+int index = indexOf(newEmployee);
+if (index != -1) {return employees[index];}
+throw new EmployeeNotFoundException();}
+@Override
+public Employee[] find() {return employees;}
+private int indexOf(Employee employee) {
+for (int i = 0; i < size; i++) {
+if (employees[i].equals(employee)) {return i;}
+}return -1;}
 }
