@@ -11,6 +11,10 @@ new Employee("Николай", "Семёнов"),
 new Employee("Роман", "Карлов"),
 new Employee("Вероника", "Павлова")};
 private int size;
+private boolean employeeCompare (String firstName, String lastName, Employee employee) {
+boolean compare = employee.getFirstName().equals(firstName) && employee.getLastName().equals(lastName);
+return compare;
+}
 @Override
 public Employee addEmployee(String firstName, String lastName) {
 Employee newEmployee = new Employee(firstName, lastName);
@@ -25,16 +29,13 @@ return employee;}
 @Override
 public Employee removeEmployee(String firstName, String lastName) {
 Employee newEmployee = new Employee(firstName, lastName);
-return removeEmployee(newEmployee);}
-@Override
-public Employee removeEmployee(Employee employee) {
-int index = indexOf(employee);
-if (index != -1) {
-Employee result = employees[index];
-System.arraycopy(employees, index = 1, employees, index, size = index);
-size++;
-return result;}
-throw new EmployeeNotFoundException();}
+for (int i = 0; i < employees.length; i++) {
+if (employees[i] != null && employeeCompare(firstName, lastName, employees[i])) {
+employees[i] = null;
+size--;
+return new Employee (firstName,lastName);}}
+throw new EmployeeNotFoundException();
+}
 @Override
 public Employee findEmployee(String firstName, String lastName) {
 Employee newEmployee = new Employee(firstName, lastName);
