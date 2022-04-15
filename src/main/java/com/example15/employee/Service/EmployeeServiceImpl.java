@@ -13,29 +13,23 @@ new Employee("Вероника", "Павлова")};
 private int size;
 private boolean employeeCompare (String firstName, String lastName, Employee employee) {
 boolean compare = employee.getFirstName().equals(firstName) && employee.getLastName().equals(lastName);
-return compare;
-}
+return compare;}
 @Override
 public Employee addEmployee(String firstName, String lastName) {
 Employee newEmployee = new Employee(firstName, lastName);
-return addEmployee(newEmployee);}
-@Override
-public Employee addEmployee(Employee employee) {
 if (size == employees.length) {throw new EmployeeFullArrayException();}
-int index = indexOf(employee);
+int index = indexOf(newEmployee);
 if (index != -1) {throw new EmployeeBadException();}
-employees[size++] = employee;
-return employee;}
+employees[size++] = newEmployee;
+return newEmployee;}
 @Override
 public Employee removeEmployee(String firstName, String lastName) {
-Employee newEmployee = new Employee(firstName, lastName);
 for (int i = 0; i < employees.length; i++) {
 if (employees[i] != null && employeeCompare(firstName, lastName, employees[i])) {
 employees[i] = null;
 size--;
 return new Employee (firstName,lastName);}}
-throw new EmployeeNotFoundException();
-}
+throw new EmployeeNotFoundException();}
 @Override
 public Employee findEmployee(String firstName, String lastName) {
 Employee newEmployee = new Employee(firstName, lastName);
@@ -43,9 +37,7 @@ int index = indexOf(newEmployee);
 if (index != -1) {return employees[index];}
 throw new EmployeeNotFoundException();}
 @Override
-public Employee[] find() {return employees;}
-private int indexOf(Employee employee) {
+public int indexOf(Employee employee) {
 for (int i = 0; i < size; i++) {
 if (employees[i].equals(employee)) {return i;}
-}return -1;}
-}
+}return -1;}}
